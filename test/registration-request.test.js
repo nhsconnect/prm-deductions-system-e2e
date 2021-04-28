@@ -6,9 +6,6 @@ import { addRecordToEhrRepo } from '../utils/add-record-to-ehr-repo';
 import { emisEhrRequestTemplate } from './data/emis-ehr-request';
 import { connectToQueueAndAssert } from '../utils/queue/handle-queue';
 
-const ehrRepoUrl = `https://${config.nhsEnvironment}.ehr-repo.patient-deductions.nhs.uk`;
-const repoToGpUrl = `https://${config.nhsEnvironment}.repo-to-gp.patient-deductions.nhs.uk`;
-
 describe('EMIS registration requests', () => {
   const RETRY_COUNT = 40;
   const POLLING_INTERVAL_MS = 500;
@@ -33,7 +30,7 @@ describe('EMIS registration requests', () => {
       const EHR_EXTRACT_INTERACTION_ID = 'RCMR_IN030000UK06';
 
       try {
-        await axios.get(`${ehrRepoUrl}/patients/${nhsNumber}`, {
+        await axios.get(`${config.ehrRepoUrl}/patients/${nhsNumber}`, {
           headers: { Authorization: config.ehrRepoAuthKeys },
           adapter
         });
@@ -101,7 +98,7 @@ const generateEhrRequest = (conversationId, nhsNumber, odsCode) => {
 const getRegistrationDetails = async conversationId => {
   try {
     const registrationDetailsResp = await axios.get(
-      `${repoToGpUrl}/registration-requests/${conversationId}`,
+      `${config.repoToGpUrl}/registration-requests/${conversationId}`,
       {
         headers: { Authorization: config.repoToGpAuthKeys },
         adapter

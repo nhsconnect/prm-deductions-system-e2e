@@ -5,9 +5,6 @@ import { config } from '../config';
 import { generateEhrExtractResponse } from './ehr-extract-template';
 
 export const addRecordToEhrRepo = async nhsNumber => {
-  const ehrRepoUrl = `https://${config.nhsEnvironment}.ehr-repo.patient-deductions.nhs.uk`;
-  const ehrRepoKey = config.ehrRepoAuthKeys;
-
   // Testing uppercase IDs sanitization in ehr repo
   const conversationId = v4();
   const messageId = v4();
@@ -15,10 +12,10 @@ export const addRecordToEhrRepo = async nhsNumber => {
   console.log('Message ID', messageId);
 
   const generateS3UrlResp = await axios.get(
-    `${ehrRepoUrl}/messages/${conversationId}/${messageId}`,
+    `${config.ehrRepoUrl}/messages/${conversationId}/${messageId}`,
     {
       headers: {
-        Authorization: ehrRepoKey
+        Authorization: config.ehrRepoAuthKeys
       },
       adapter
     }
@@ -47,9 +44,9 @@ export const addRecordToEhrRepo = async nhsNumber => {
     }
   };
 
-  const patchResp = await axios.post(`${ehrRepoUrl}/messages`, postRequestBody, {
+  const patchResp = await axios.post(`${config.ehrRepoUrl}/messages`, postRequestBody, {
     headers: {
-      Authorization: ehrRepoKey
+      Authorization: config.ehrRepoAuthKeys
     },
     adapter
   });

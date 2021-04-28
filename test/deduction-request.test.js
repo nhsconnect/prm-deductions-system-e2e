@@ -5,10 +5,6 @@ import { v4, v4 as uuid } from 'uuid';
 import { connectToQueueAndAssert } from '../utils/queue/handle-queue';
 import { largeHealthRecordExtractTemplate } from './data/large-ehr-extract';
 
-const gpToRepoUrl = `https://${config.nhsEnvironment}.gp-to-repo.patient-deductions.nhs.uk`;
-const ehrRepoUrl = `https://${config.nhsEnvironment}.ehr-repo.patient-deductions.nhs.uk`;
-const gp2gpAdaptor = `https://${config.nhsEnvironment}.gp2gp-adaptor.patient-deductions.nhs.uk`;
-
 describe('Deduction request', () => {
   const RETRY_COUNT = 40;
   const POLLING_INTERVAL_MS = 500;
@@ -181,7 +177,7 @@ describe('Deduction request', () => {
         expect(patientHealthRecordStatus).toBe(200);
 
         const patientHealthRecord = await axios
-          .get(`${ehrRepoUrl}/patients/${nhsNumber}`, {
+          .get(`${config.ehrRepoUrl}/patients/${nhsNumber}`, {
             headers: {
               Authorization: config.ehrRepoAuthKeys
             },
@@ -203,12 +199,15 @@ describe('Deduction request', () => {
 
 const getPatientPdsDetails = async nhsNumber => {
   try {
-    const pdsResponse = await axios.get(`${gp2gpAdaptor}/patient-demographics/${nhsNumber}/`, {
-      headers: {
-        Authorization: config.gp2gpAdaptorAuthKeys
-      },
-      adapter
-    });
+    const pdsResponse = await axios.get(
+      `${config.gp2gpAdaptorUrl}/patient-demographics/${nhsNumber}/`,
+      {
+        headers: {
+          Authorization: config.gp2gpAdaptorAuthKeys
+        },
+        adapter
+      }
+    );
 
     return pdsResponse.data;
   } catch (err) {
@@ -224,7 +223,7 @@ const assignPatientToOdsCode = async (nhsNumber, odsCode) => {
 
     // Update PDS
     const patchResponse = await axios.patch(
-      `${gp2gpAdaptor}/patient-demographics/${nhsNumber}`,
+      `${config.gp2gpAdaptorUrl}/patient-demographics/${nhsNumber}`,
       {
         pdsId: pdsResponse.data.patientPdsId,
         serialChangeNumber: pdsResponse.data.serialChangeNumber,
@@ -247,7 +246,7 @@ const assignPatientToOdsCode = async (nhsNumber, odsCode) => {
 const makeDeductionRequest = async nhsNumber => {
   try {
     const deductionRequest = await axios.post(
-      `${gpToRepoUrl}/deduction-requests`,
+      `${config.gpToRepoUrl}/deduction-requests`,
       { nhsNumber },
       {
         headers: { Authorization: config.gpToRepoAuthKeys },
@@ -264,7 +263,7 @@ const makeDeductionRequest = async nhsNumber => {
 const getHealthRecordStatus = async (nhsNumber, conversationId) => {
   try {
     const patientHealthRecordResponse = await axios.get(
-      `${ehrRepoUrl}/patients/${nhsNumber}/health-records/${conversationId}`,
+      `${config.ehrRepoUrl}/patients/${nhsNumber}/health-records/${conversationId}`,
       {
         headers: {
           Authorization: config.ehrRepoAuthKeys

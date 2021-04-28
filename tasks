@@ -64,8 +64,13 @@ function configure_queue_access {
   export AMQP_QUEUE_URL=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${amqp_queue_url_parameter_name} | jq -r .Parameter.Value")
 }
 
-function configure_mhs_inbound_url {
+function configure_service_urls {
   check_env
+  export REPO_TO_GP_URL="https://repo-to-gp.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
+  export EHR_REPO_URL="https://${NHS_ENVIRONMENT}.ehr-repo.patient-deductions.nhs.uk"
+  export GP2GP_ADAPTOR_URL="https://${NHS_ENVIRONMENT}.gp2gp-adaptor.patient-deductions.nhs.uk"
+  export GP_TO_REPO_URL="https://${NHS_ENVIRONMENT}.gp-to-repo.patient-deductions.nhs.uk"
+
   if [[ $NHS_ENVIRONMENT == "dev" ]]; then
     export MHS_INBOUND_URL=http://mhs-inbound-dev-opentest.mhs.patient-deductions.nhs.uk
   else
@@ -147,7 +152,7 @@ case "${command}" in
       configure_ehr_repo_service_auth_keys
       configure_gp_to_repo_service_auth_keys
       configure_gp2gp_adaptor_service_auth_keys
-      configure_mhs_inbound_url
+      configure_service_urls
       dojo "./tasks _test_e2e"
       ;;
   _test_e2e_test_harness)
@@ -164,7 +169,7 @@ case "${command}" in
       configure_ehr_repo_service_auth_keys
       configure_gp_to_repo_service_auth_keys
       configure_gp2gp_adaptor_service_auth_keys
-      configure_mhs_inbound_url
+      configure_service_urls
       dojo "./tasks _test_e2e_test_harness"
       ;;
   *)
