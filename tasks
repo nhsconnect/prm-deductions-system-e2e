@@ -68,7 +68,7 @@ function configure_service_urls {
   check_env
   export REPO_TO_GP_URL="https://repo-to-gp.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
   export EHR_REPO_URL="https://ehr-repo.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
-  export GP2GP_ADAPTOR_URL="https://${NHS_ENVIRONMENT}.gp2gp-adaptor.patient-deductions.nhs.uk"
+  export GP2GP_ADAPTOR_URL="https://gp2gp-adaptor.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
   export GP_TO_REPO_URL="https://gp-to-repo.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
 
   if [[ $NHS_ENVIRONMENT == "dev" ]]; then
