@@ -4,6 +4,21 @@ import adapter from 'axios/lib/adapters/http';
 import { v4, v4 as uuid } from 'uuid';
 import { connectToQueueAndAssert } from '../utils/queue/handle-queue';
 import { largeHealthRecordExtractTemplate } from './data/large-ehr-extract';
+import fs from 'fs';
+import https from 'https';
+
+const httpsAgent = new https.Agent({
+  cert: fs.readFileSync(`certs/${config.nhsEnvironment}/repo-client.crt`),
+  key: fs.readFileSync(`certs/${config.nhsEnvironment}/repo-client.key`),
+  ca: [
+    fs.readFileSync(`certs/${config.nhsEnvironment}/repo-ca1.crt`),
+    fs.readFileSync(`certs/${config.nhsEnvironment}/repo-ca2.crt`)
+  ],
+  // Turns off certificate name validation
+  checkServerIdentity: () => {
+    return null;
+  }
+});
 
 describe('Deduction request', () => {
   const RETRY_COUNT = 40;
@@ -50,9 +65,13 @@ describe('Deduction request', () => {
         };
 
         await axios
-          .post(config.mhsInboundUrl, largeHealthRecordExtract, { headers: headers, adapter })
-          .catch(() => {
-            console.log("MHS can't handle this message so it returns with 500");
+          .post(config.mhsInboundUrl, largeHealthRecordExtract, {
+            headers: headers,
+            adapter,
+            httpsAgent
+          })
+          .catch(ex => {
+            console.log(ex);
           });
 
         console.log('Added health record to mhs inbound');

@@ -5,6 +5,21 @@ import { config } from '../config';
 import { addRecordToEhrRepo } from '../utils/add-record-to-ehr-repo';
 import { emisEhrRequestTemplate } from './data/emis-ehr-request';
 import { connectToQueueAndAssert } from '../utils/queue/handle-queue';
+import fs from 'fs';
+import https from 'https';
+
+const httpsAgent = new https.Agent({
+  cert: fs.readFileSync(`certs/${config.nhsEnvironment}/repo-client.crt`),
+  key: fs.readFileSync(`certs/${config.nhsEnvironment}/repo-client.key`),
+  ca: [
+    fs.readFileSync(`certs/${config.nhsEnvironment}/repo-ca1.crt`),
+    fs.readFileSync(`certs/${config.nhsEnvironment}/repo-ca2.crt`)
+  ],
+  // Turns off certificate name validation
+  checkServerIdentity: () => {
+    return null;
+  }
+});
 
 describe('EMIS registration requests', () => {
   const RETRY_COUNT = 40;
@@ -52,7 +67,7 @@ describe('EMIS registration requests', () => {
       };
 
       await axios
-        .post(config.mhsInboundUrl, ehrRequest, { headers: headers, adapter })
+        .post(config.mhsInboundUrl, ehrRequest, { headers: headers, adapter, httpsAgent })
         .catch(() => {
           console.log("MHS can't handle this message so it returns with 500");
         });

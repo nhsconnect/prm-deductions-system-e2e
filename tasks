@@ -64,6 +64,18 @@ function configure_queue_access {
   export AMQP_QUEUE_URL=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${amqp_queue_url_parameter_name} | jq -r .Parameter.Value")
 }
 
+function _configure_mtls_certificates {
+  client_key_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/repo-mhs-client-key"
+  client_cert_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/repo-mhs-client-cert"
+  ca1_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/e2e-tests-mhs-ca1"
+  ca2_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/e2e-tests-mhs-ca2"
+  mkdir -p certs/${NHS_ENVIRONMENT}
+  aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${client_key_parameter_name} | jq -r .Parameter.Value > certs/${NHS_ENVIRONMENT}/repo-client.key
+  aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${client_cert_parameter_name} | jq -r .Parameter.Value > certs/${NHS_ENVIRONMENT}/repo-client.crt
+  aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${ca1_parameter_name} | jq -r .Parameter.Value > certs/${NHS_ENVIRONMENT}/repo-ca1.crt
+  aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${ca2_parameter_name} | jq -r .Parameter.Value > certs/${NHS_ENVIRONMENT}/repo-ca2.crt
+}
+
 function configure_service_urls {
   check_env
   export REPO_TO_GP_URL="https://repo-to-gp.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
@@ -72,9 +84,9 @@ function configure_service_urls {
   export GP_TO_REPO_URL="https://gp-to-repo.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
 
   if [[ $NHS_ENVIRONMENT == "dev" ]]; then
-    export MHS_INBOUND_URL=http://mhs-inbound-dev-opentest.mhs.patient-deductions.nhs.uk
+    export MHS_INBOUND_URL=https://mhs-inbound-dev-opentest.mhs.patient-deductions.nhs.uk
   else
-    export MHS_INBOUND_URL=http://mhs-inbound-test-b86041.mhs.patient-deductions.nhs.uk
+    export MHS_INBOUND_URL=https://mhs-inbound-test-b86041.mhs.patient-deductions.nhs.uk
   fi
 }
 
@@ -141,6 +153,9 @@ case "${command}" in
   test_lint)
       dojo "./tasks _test_lint"
       ;;
+  _configure_mtls_certificates)
+      _configure_mtls_certificates
+      ;;
   _test_e2e)
       npm install
       npm run test
@@ -153,6 +168,7 @@ case "${command}" in
       configure_gp_to_repo_service_auth_keys
       configure_gp2gp_adaptor_service_auth_keys
       configure_service_urls
+      ./tasks _configure_mtls_certificates
       dojo "./tasks _test_e2e"
       ;;
   _test_e2e_test_harness)
@@ -170,6 +186,7 @@ case "${command}" in
       configure_gp_to_repo_service_auth_keys
       configure_gp2gp_adaptor_service_auth_keys
       configure_service_urls
+      ./tasks _configure_mtls_certificates
       dojo "./tasks _test_e2e_test_harness"
       ;;
   *)
