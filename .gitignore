@@ -17,3 +17,5 @@ jspm_packages/
 
 # Dojo
 *.dojo
+
+certs/dev
