@@ -32,16 +32,20 @@ describe('EMIS registration requests', () => {
       const testData = {
         dev: {
           odsCode: 'A91720',
-          nhsNumber: '9692842304'
+          nhsNumber: '9692842304',
+          fromPartyId: 'A91720-9198820',
+          toPartyId: 'A91368-9199177'
         },
         test: {
           odsCode: 'N82668',
-          nhsNumber: '9692295281'
+          nhsNumber: '9692295281',
+          fromPartyId: '5XZ-821385',
+          toPartyId: 'B86041-822103'
         }
       };
 
       // Setup: add an EHR to the repo
-      const { nhsNumber, odsCode } = testData[config.nhsEnvironment];
+      const { nhsNumber, odsCode, fromPartyId, toPartyId } = testData[config.nhsEnvironment];
       const EHR_EXTRACT_INTERACTION_ID = 'RCMR_IN030000UK06';
 
       try {
@@ -58,7 +62,7 @@ describe('EMIS registration requests', () => {
 
       // Action: send an EHR request to MHS Adapter inbound
       const conversationId = v4();
-      const ehrRequest = generateEhrRequest(conversationId, nhsNumber, odsCode);
+      const ehrRequest = generateEhrRequest(conversationId, nhsNumber, odsCode, fromPartyId, toPartyId);
 
       const headers = {
         Soapaction: 'urn:nhs:names:services:gp2gp/RCMR_IN010000UK05',
@@ -103,11 +107,13 @@ describe('EMIS registration requests', () => {
   );
 });
 
-const generateEhrRequest = (conversationId, nhsNumber, odsCode) => {
+const generateEhrRequest = (conversationId, nhsNumber, odsCode, fromPartyId, toPartyId) => {
   return emisEhrRequestTemplate
     .replace('${conversationId}', conversationId)
     .replace('${nhsNumber}', nhsNumber)
-    .replace('${odsCode}', odsCode);
+    .replace('${odsCode}', odsCode)
+    .replace('${fromPartyId}', fromPartyId)
+    .replace('${toPartyId}', toPartyId);
 };
 
 const getRegistrationDetails = async conversationId => {

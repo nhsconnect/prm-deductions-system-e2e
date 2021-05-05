@@ -325,11 +325,11 @@ const generateLargeHealthRecordExtract = (
   attachmentId
 ) => {
   return largeHealthRecordExtractTemplate
-    .replace('${conversationId}', conversationId)
-    .replace('${nhsNumber}', nhsNumber)
-    .replace('${odsCode}', odsCode)
-    .replace('${messageId}', messageId)
-    .replace('${attachmentId}', attachmentId);
+    .replaceAll('${conversationId}', conversationId)
+    .replaceAll('${nhsNumber}', nhsNumber)
+    .replaceAll('${odsCode}', odsCode)
+    .replaceAll('${messageId}', messageId)
+    .replaceAll('${attachmentId}', attachmentId);
 };
 
 const sleep = ms => {
