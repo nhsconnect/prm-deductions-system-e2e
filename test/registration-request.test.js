@@ -62,7 +62,13 @@ describe('EMIS registration requests', () => {
 
       // Action: send an EHR request to MHS Adapter inbound
       const conversationId = v4();
-      const ehrRequest = generateEhrRequest(conversationId, nhsNumber, odsCode, fromPartyId, toPartyId);
+      const ehrRequest = generateEhrRequest(
+        conversationId,
+        nhsNumber,
+        odsCode,
+        fromPartyId,
+        toPartyId
+      );
 
       const headers = {
         Soapaction: 'urn:nhs:names:services:gp2gp/RCMR_IN010000UK05',
