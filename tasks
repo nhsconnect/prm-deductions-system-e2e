@@ -67,8 +67,8 @@ function configure_queue_access {
 function _configure_mtls_certificates {
   client_key_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/repo-mhs-client-key"
   client_cert_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/repo-mhs-client-cert"
-  ca1_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/e2e-tests-mhs-ca1"
-  ca2_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/e2e-tests-mhs-ca2"
+  ca1_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/external/e2e-tests-mhs-ca1"
+  ca2_parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/external/e2e-tests-mhs-ca2"
   mkdir -p certs/${NHS_ENVIRONMENT}
   aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${client_key_parameter_name} | jq -r .Parameter.Value > certs/${NHS_ENVIRONMENT}/repo-client.key
   aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${client_cert_parameter_name} | jq -r .Parameter.Value > certs/${NHS_ENVIRONMENT}/repo-client.crt
