@@ -35,9 +35,21 @@ describe('Deduction request', () => {
 
         // Setup
         await assignPatientToOdsCode(nhsNumber, testHarnessOdsCode);
-        console.log('Updated patients ods code to test harness ods code');
 
-        await sleep(2000);
+        let patientOdsCode;
+        for (let i = 0; i < RETRY_COUNT; i++) {
+          const patientPdsDetails = await getPatientPdsDetails(nhsNumber);
+          patientOdsCode = patientPdsDetails.data.odsCode;
+
+          console.log(`try: ${i} - status: ${patientOdsCode}`);
+
+          if (patientOdsCode === testHarnessOdsCode) {
+            break;
+          }
+          await sleep(POLLING_INTERVAL_MS);
+        }
+
+        expect(patientOdsCode).toEqual(testHarnessOdsCode);
 
         // Action
         const deductionRequestResource = await makeDeductionRequest(nhsNumber);
@@ -79,7 +91,21 @@ describe('Deduction request', () => {
 
         console.log('Added health record to mhs inbound');
 
-        await sleep(5000);
+        const expectedStatus = 'continue_message_sent';
+        let deductionRequestStatus;
+        for (let i = 0; i < RETRY_COUNT; i++) {
+          deductionRequestStatus = await getDeductionRequestStatus(
+            nhsNumber,
+            deductionRequestResource
+          );
+          console.log(`try: ${i} - status: ${deductionRequestStatus}`);
+
+          if (deductionRequestStatus === expectedStatus) {
+            break;
+          }
+          await sleep(POLLING_INTERVAL_MS);
+        }
+        expect(deductionRequestStatus).toBe(expectedStatus);
 
         // Wait for continue message in test harness queue
         connectToQueueAndAssert(body => {
