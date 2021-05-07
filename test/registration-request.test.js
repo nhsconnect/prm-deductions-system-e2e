@@ -78,8 +78,8 @@ describe('EMIS registration requests', () => {
 
       await axios
         .post(config.mhsInboundUrl, ehrRequest, { headers: headers, adapter, httpsAgent })
-        .catch(() => {
-          console.log("MHS can't handle this message so it returns with 500");
+        .catch(ex => {
+          console.log('Failed to send to ehr request to MHS, Status: ', ex.response.status);
         });
 
       console.log('ConversationId:', conversationId);
@@ -133,7 +133,7 @@ const getRegistrationDetails = async conversationId => {
     );
     return registrationDetailsResp.data.data.attributes;
   } catch (err) {
-    console.log(err);
+    console.log('Failed to get registration details, Status: ', err.response.status);
     return {};
   }
 };
