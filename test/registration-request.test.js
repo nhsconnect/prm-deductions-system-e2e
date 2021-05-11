@@ -62,8 +62,10 @@ describe('EMIS registration requests', () => {
 
       // Action: send an EHR request to MHS Adapter inbound
       const conversationId = v4();
+      const messageId = v4();
       const ehrRequest = generateEhrRequest(
         conversationId,
+        messageId,
         nhsNumber,
         odsCode,
         fromPartyId,
@@ -113,13 +115,21 @@ describe('EMIS registration requests', () => {
   );
 });
 
-const generateEhrRequest = (conversationId, nhsNumber, odsCode, fromPartyId, toPartyId) => {
+const generateEhrRequest = (
+  conversationId,
+  messageId,
+  nhsNumber,
+  odsCode,
+  fromPartyId,
+  toPartyId
+) => {
   return emisEhrRequestTemplate
-    .replace('${conversationId}', conversationId)
-    .replace('${nhsNumber}', nhsNumber)
-    .replace('${odsCode}', odsCode)
-    .replace('${fromPartyId}', fromPartyId)
-    .replace('${toPartyId}', toPartyId);
+    .replace(/\$\{conversationId\}/g, conversationId)
+    .replace(/\$\{messageId\}/g, messageId)
+    .replace(/\$\{nhsNumber\}/g, nhsNumber)
+    .replace(/\$\{odsCode\}/g, odsCode)
+    .replace(/\$\{fromPartyId\}/g, fromPartyId)
+    .replace(/\$\{toPartyId\}/g, toPartyId);
 };
 
 const getRegistrationDetails = async conversationId => {
