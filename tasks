@@ -84,9 +84,9 @@ function configure_service_urls {
   export GP_TO_REPO_URL="https://gp-to-repo.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
 
   if [[ $NHS_ENVIRONMENT == "dev" ]]; then
-    export MHS_INBOUND_URL=https://mhs-inbound-dev-opentest.mhs.patient-deductions.nhs.uk
+    export MHS_INBOUND_URL=https://inbound-opentest.mhs.dev.non-prod.patient-deductions.nhs.uk
   else
-    export MHS_INBOUND_URL=https://mhs-inbound-test-b86041.mhs.patient-deductions.nhs.uk
+    export MHS_INBOUND_URL=https://inbound-b86041.mhs.test.non-prod.patient-deductions.nhs.uk
   fi
 }
 
