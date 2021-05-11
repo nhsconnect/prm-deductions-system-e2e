@@ -16,6 +16,6 @@ export const connectOptions = {
 };
 
 export const subscribeHeaders = {
-  destination: 'test-harness-raw-inbound',
+  destination: 'test-harness-inbound',
   ack: 'auto'
 };
