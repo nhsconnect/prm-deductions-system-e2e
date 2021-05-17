@@ -38,8 +38,7 @@ pipelines:
             test_e2e:
               timeout: 15
               resources:
-                - deductions-private
-                - dev
+                - docker
               tasks:
                 - exec:
                     command: /bin/bash
@@ -84,8 +83,7 @@ pipelines:
             test_e2e:
               timeout: 15
               resources:
-                - deductions-private
-                - test
+                - docker
               tasks:
                 - exec:
                     command: /bin/bash
