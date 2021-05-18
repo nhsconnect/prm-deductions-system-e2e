@@ -120,7 +120,7 @@ describe('Deduction request', () => {
     it(
       'should handle a deduction for a patient of TPP practice with the small Health Record',
       async () => {
-        const nhsNumber = '9442964410';
+        const nhsNumber = '9692295648';
         const tppOdsCode = 'M85019';
 
         // Setup
