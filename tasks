@@ -44,7 +44,7 @@ function configure_gp_to_repo_service_auth_keys {
 }
 
 function configure_gp2gp_adaptor_service_auth_keys {
-  parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/gp2gp-adaptor-authorization-keys"
+  parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/api-keys/gp2gp-adaptor/e2e-test"
   echo "${parameter_name}"
   export GP2GP_ADAPTOR_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
