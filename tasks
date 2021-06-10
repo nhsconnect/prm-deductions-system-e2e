@@ -9,6 +9,15 @@ set -Eeo pipefail
 AWS_DEFAULT_REGION=eu-west-2
 export NHS_SERVICE=system-e2e
 
+AWS_HELPERS_FILE="utils/aws-helpers"
+AWS_HELPERS_VERSION=0.2.1
+mkdir -p utils
+if [[ ! -f $AWS_HELPERS_FILE ]];then
+  wget --quiet -O $AWS_HELPERS_FILE https://github.com/nhsconnect/prm-deductions-support-infra/releases/download/${AWS_HELPERS_VERSION}/aws-helpers
+fi
+chmod +x $AWS_HELPERS_FILE
+source $AWS_HELPERS_FILE
+
 ####################################
 # Instance (Environment) Variables #
 ####################################
@@ -27,31 +36,23 @@ function check_nhs_service {
   fi
 }
 
-function get_aws_account_id {
-  AWS_ACCOUNT_ID=$(dojo -c Dojofile-infra "aws sts get-caller-identity | jq -r .Account")
-}
-
 function configure_repo_to_gp_service_auth_keys {
   parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/repo-to-gp-authorization-keys"
-  echo "${parameter_name}"
   export REPO_TO_GP_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
 
 function configure_gp_to_repo_service_auth_keys {
   parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/gp-to-repo-authorization-keys"
-  echo "${parameter_name}"
   export GP_TO_REPO_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
 
 function configure_gp2gp_adaptor_service_auth_keys {
   parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/api-keys/gp2gp-adaptor/e2e-test"
-  echo "${parameter_name}"
   export GP2GP_ADAPTOR_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
 
 function configure_ehr_repo_service_auth_keys {
   parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/api-keys/ehr-repo/e2e-test"
-  echo "${parameter_name}"
   export EHR_REPO_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
 
@@ -162,7 +163,7 @@ case "${command}" in
       ;;
   test_e2e)
       check_env
-      get_aws_account_id
+      eval $(./utils/aws-helpers assume_environment_role $NHS_ENVIRONMENT)
       configure_repo_to_gp_service_auth_keys
       configure_ehr_repo_service_auth_keys
       configure_gp_to_repo_service_auth_keys
@@ -178,8 +179,8 @@ case "${command}" in
       ;;
   test_e2e_test_harness)
       check_env
-      get_aws_account_id
       export USE_TEST_HARNESS=true
+      eval $(./utils/aws-helpers assume_environment_role $NHS_ENVIRONMENT)
       configure_queue_access
       configure_repo_to_gp_service_auth_keys
       configure_ehr_repo_service_auth_keys

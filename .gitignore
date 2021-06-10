@@ -20,3 +20,5 @@ jspm_packages/
 
 certs/dev
 certs/test
+
+/utils/aws-helpers
