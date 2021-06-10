@@ -37,12 +37,12 @@ function check_nhs_service {
 }
 
 function configure_repo_to_gp_service_auth_keys {
-  parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/repo-to-gp-authorization-keys"
+  parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/api-keys/repo-to-gp/e2e-test"
   export REPO_TO_GP_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
 
 function configure_gp_to_repo_service_auth_keys {
-  parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/gp-to-repo-authorization-keys"
+  parameter_name="/repo/${NHS_ENVIRONMENT}/user-input/api-keys/gp-to-repo/e2e-test"
   export GP_TO_REPO_AUTHORIZATION_KEYS=$(dojo -c Dojofile-infra "aws ssm get-parameter --with-decryption --region ${AWS_DEFAULT_REGION} --name  ${parameter_name} | jq -r .Parameter.Value")
 }
 
