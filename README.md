@@ -10,6 +10,14 @@ This repository is responsible for the end to end testing of our services.
 | /test             | Contains end-to-end tests                         |
 | /utils            | Contains utils for the tests (eg. EHR template)   |
 
+## Prerequisites
+
+Follow the links to download
+
+- [Node](https://nodejs.org/en/download/package-manager/#nvm) - version 14.x
+- [Docker](https://docs.docker.com/install/)
+- [kudulab/dojo](https://github.com/kudulab/dojo#installation)
+
 
 ## Access to AWS
 
