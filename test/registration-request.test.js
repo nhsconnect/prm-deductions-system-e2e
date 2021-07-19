@@ -41,6 +41,12 @@ describe('EMIS registration requests', () => {
           nhsNumber: '9692295281',
           fromPartyId: '5XZ-821385',
           toPartyId: 'B86041-822103'
+        },
+        'pre-prod': {
+          odsCode: 'N82668',
+          nhsNumber: '9692295281', //TODO use pre-prod patient data set
+          fromPartyId: '5XZ-821385',
+          toPartyId: 'N85027-822607'
         }
       };
 
