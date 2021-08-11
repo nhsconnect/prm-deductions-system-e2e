@@ -260,7 +260,7 @@ const getPatientPdsDetails = async nhsNumber => {
 
     return pdsResponse.data;
   } catch (err) {
-    console.log(err.response);
+    console.log(err.response.status);
     return undefined;
   }
 };
@@ -288,7 +288,7 @@ const assignPatientToOdsCode = async (nhsNumber, odsCode) => {
     );
     expect(patchResponse.status).toBe(204);
   } catch (err) {
-    console.log(err.response);
+    console.log(err.response.status);
   }
 };
 
