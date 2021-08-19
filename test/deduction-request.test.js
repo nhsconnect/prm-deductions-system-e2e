@@ -288,7 +288,9 @@ const assignPatientToOdsCode = async (nhsNumber, odsCode) => {
     );
     expect(patchResponse.status).toBe(204);
   } catch (err) {
-    console.log(err.response.status);
+    console.log(
+      `Assigning patient ${nhsNumber} to ODS code ${odsCode} failed with ${err.response.status} status code`
+    );
   }
 };
 
