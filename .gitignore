@@ -22,4 +22,4 @@ certs/dev
 certs/test
 certs/pre-prod
 
-/utils/aws-helpers
+/utils/*/aws-helpers
