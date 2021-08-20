@@ -175,7 +175,7 @@ case "${command}" in
   test_e2e_test_harness)
       check_env
       export USE_TEST_HARNESS=true
-      eval $(./utils/aws-helpers assume_environment_role $NHS_ENVIRONMENT)
+      _assume_environment_role $NHS_ENVIRONMENT
       configure_queue_access
       configure_repo_to_gp_service_auth_keys
       configure_ehr_repo_service_auth_keys
