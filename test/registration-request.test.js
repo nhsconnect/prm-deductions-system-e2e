@@ -4,6 +4,7 @@ import { v4 } from 'uuid';
 import { config } from '../config';
 import { addRecordToEhrRepo } from '../utils/add-record-to-ehr-repo';
 import { emisEhrRequestTemplate } from './data/emis-ehr-request';
+import { assignPatientToOdsCode } from './utils';
 // import { connectToQueueAndAssert } from '../utils/queue/handle-queue';
 import fs from 'fs';
 import https from 'https';
@@ -47,6 +48,8 @@ describe('EMIS registration requests', () => {
       // Setup: add an EHR to the repo
       const { nhsNumber, odsCode, fromPartyId, toPartyId } = testData[config.nhsEnvironment];
       // const EHR_EXTRACT_INTERACTION_ID = 'RCMR_IN030000UK06';
+      // Setup the patient to pretend its going to be transfered to the test harness
+      await assignPatientToOdsCode(nhsNumber, odsCode);
 
       try {
         await axios.get(`${config.ehrRepoUrl}/patients/${nhsNumber}`, {
