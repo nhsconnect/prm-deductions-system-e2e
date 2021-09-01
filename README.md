@@ -78,7 +78,7 @@ Run the following command to confirm the role was assumed correctly:
 
 ## Environment variables
 
-- `NHS_ENVIRONMENT` - Set to the current environment ('dev' for OpenTest and 'test' for PTL environment) in which the container is deployed. It is populated by the pipeline.gocd.yml
+- `NHS_ENVIRONMENT` - Set to the current environment in which the container is deployed. It is populated by the pipeline.gocd.yml
 - `MHS_INBOUND_URL` - The URL for MHS Inbound where we receive messages - this value has been set in tasks
 - `${SERVICE-NAME}-AUTHORIZATION_KEYS` - Authorization keys for each service - these are automatically taken from AWS Parameter Store in the 'dev' and 'test' environments.
 

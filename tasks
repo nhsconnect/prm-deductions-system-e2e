@@ -88,12 +88,8 @@ function configure_service_urls {
   export GP2GP_ADAPTOR_URL="https://gp2gp-adaptor.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
   export GP_TO_REPO_URL="https://gp-to-repo.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk"
 
-  if [[ $NHS_ENVIRONMENT == "dev" ]]; then
-    export MHS_INBOUND_URL=https://in-opentest.mhs.dev.non-prod.patient-deductions.nhs.uk
-  else
-    ods_code=$(get_aws_ssm_secret "/repo/${NHS_ENVIRONMENT}/user-input/external/gp2gp-adaptor-deductions-ods-code")
-    export MHS_INBOUND_URL=https://in-${ods_code}.mhs.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk
-  fi
+  ods_code=$(get_aws_ssm_secret "/repo/${NHS_ENVIRONMENT}/user-input/external/gp2gp-adaptor-deductions-ods-code")
+  export MHS_INBOUND_URL=https://in-${ods_code}.mhs.${NHS_ENVIRONMENT}.non-prod.patient-deductions.nhs.uk
 }
 
 ####################

@@ -31,8 +31,8 @@ describe('EMIS registration requests', () => {
     async done => {
       const testData = {
         dev: {
-          odsCode: 'A91720',
-          nhsNumber: '9692842304',
+          odsCode: 'C81116',
+          nhsNumber: '9692295885',
           fromPartyId: 'A91720-9198820',
           toPartyId: 'A91368-9199177'
         },

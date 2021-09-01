@@ -30,7 +30,7 @@ describe('Deduction request', () => {
       'should send continue message when large health record extract received',
       async done => {
         const nhsNumber = '9692842312';
-        const testHarnessOdsCode = 'A91720';
+        const testHarnessOdsCode = 'C81116';
         // const CONTINUE_REQUEST_INTERACTION_ID = 'COPC_IN000001UK01';
 
         // Setup
