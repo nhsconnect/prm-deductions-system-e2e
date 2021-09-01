@@ -29,7 +29,7 @@ describe('Deduction request', () => {
     it(
       'should send continue message when large health record extract received',
       async done => {
-        const nhsNumber = '9692842312';
+        const nhsNumber = '9693795814';
         const testHarnessOdsCode = 'C81116';
         // const CONTINUE_REQUEST_INTERACTION_ID = 'COPC_IN000001UK01';
 
@@ -260,8 +260,8 @@ const getPatientPdsDetails = async nhsNumber => {
 
     return pdsResponse.data;
   } catch (err) {
-    console.log(err.response.status);
-    return undefined;
+    console.log(`Getting patient details failed with status: ${err.response.status}`);
+    throw err;
   }
 };
 

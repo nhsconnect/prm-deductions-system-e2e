@@ -32,7 +32,7 @@ describe('EMIS registration requests', () => {
       const testData = {
         dev: {
           odsCode: 'C81116',
-          nhsNumber: '9692295885',
+          nhsNumber: '9693795822',
           fromPartyId: 'A91720-9198820',
           toPartyId: 'A91368-9199177'
         },
