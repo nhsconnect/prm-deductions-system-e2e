@@ -83,10 +83,7 @@ describe('Deduction request', () => {
             httpsAgent
           })
           .catch(ex => {
-            console.log(
-              'Failed to send to large health record to MHS, Status: ',
-              ex.response.status
-            );
+            console.log('Failed to send to large health record to MHS, Exception: ', ex);
           });
 
         console.log('Added health record to mhs inbound');

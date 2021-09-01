@@ -81,7 +81,7 @@ describe('EMIS registration requests', () => {
       await axios
         .post(config.mhsInboundUrl, ehrRequest, { headers: headers, adapter, httpsAgent })
         .catch(ex => {
-          console.log('Failed to send to ehr request to MHS, Status: ', ex.response.status);
+          console.log('Failed to send to ehr request to MHS, Exception: ', ex);
         });
 
       console.log('ConversationId:', conversationId);
