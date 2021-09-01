@@ -33,8 +33,8 @@ describe('EMIS registration requests', () => {
         dev: {
           odsCode: 'C81116',
           nhsNumber: '9693795822',
-          fromPartyId: 'B85002-822652',
-          toPartyId: 'C81116-822653'
+          fromPartyId: 'C81116-822653',
+          toPartyId: 'B85002-822652'
         },
         test: {
           odsCode: 'N82668',
