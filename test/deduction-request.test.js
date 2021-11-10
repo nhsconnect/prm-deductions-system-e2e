@@ -29,7 +29,7 @@ describe('Deduction request', () => {
   if (config.useTestHarness) {
     it(
       'should send continue message when large health record extract received',
-      async done => {
+      async () => {
         const nhsNumber = '9693795814';
         const testHarnessOdsCode = 'C81116';
         // const CONTINUE_REQUEST_INTERACTION_ID = 'COPC_IN000001UK01';
@@ -104,7 +104,6 @@ describe('Deduction request', () => {
           await sleep(POLLING_INTERVAL_MS);
         }
         expect(deductionRequestStatus).toBe(expectedStatus);
-        done();
 
         // Wait for continue message in test harness queue
         // connectToQueueAndAssert(body => {
@@ -257,7 +256,6 @@ const makeDeductionRequest = async nhsNumber => {
     return deductionRequest.headers.location;
   } catch (err) {
     console.log('failed to make deduction request', err.response.status);
-    return {};
   }
 };
 

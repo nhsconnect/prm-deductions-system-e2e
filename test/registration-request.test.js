@@ -25,11 +25,11 @@ const httpsAgent = new https.Agent({
 describe('EMIS registration requests', () => {
   const RETRY_COUNT = 40;
   const POLLING_INTERVAL_MS = 500;
-  const TEST_TIMEOUT = 3 * RETRY_COUNT * POLLING_INTERVAL_MS;
+  const TEST_TIMEOUT = 5 * RETRY_COUNT * POLLING_INTERVAL_MS;
 
   it(
     'should capture a registration request',
-    async done => {
+    async () => {
       const testData = {
         dev: {
           odsCode: 'C81116',
@@ -112,7 +112,6 @@ describe('EMIS registration requests', () => {
       //     done();
       //   });
       // }
-      done();
     },
     TEST_TIMEOUT
   );
