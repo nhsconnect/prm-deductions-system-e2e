@@ -1,0 +1,141 @@
+{
+  "decisions": {
+    "1002475|jest>@jest/core>jest-haste-map>sane>micromatch>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>@jest/core>jest-haste-map>sane>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>@jest/core>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>@jest/core>@jest/transform>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>@jest/core>@jest/reporters>@jest/transform>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>jest-cli>@jest/core>@jest/reporters>@jest/transform>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>jest-cli>@jest/core>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>@jest/core>jest-config>@jest/test-sequencer>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>jest-cli>@jest/core>jest-config>@jest/test-sequencer>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>anymatch>micromatch>braces>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>jest-cli>@jest/core>jest-config>@jest/test-sequencer>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>anymatch>micromatch>extglob>expand-brackets>snapdragon>base>cache-base>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002475|jest>jest-cli>@jest/core>jest-config>@jest/test-sequencer>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>anymatch>micromatch>extglob>expand-brackets>snapdragon>base>cache-base>union-value>set-value": {
+      "decision": "fix",
+      "madeAt": 1636370014523
+    },
+    "1002401|eslint>strip-ansi>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>@jest/core>strip-ansi>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>@jest/core>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>@jest/core>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>jest-cli>@jest/core>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>jest-cli>@jest/core>@jest/reporters>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>jest-cli>@jest/core>@jest/reporters>@jest/test-result>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>jest-cli>@jest/core>jest-config>@jest/test-sequencer>@jest/test-result>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>jest-cli>@jest/core>jest-runner>jest-config>@jest/test-sequencer>@jest/test-result>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002401|jest>jest-cli>@jest/core>jest-runner>jest-runtime>jest-config>@jest/test-sequencer>@jest/test-result>@jest/console>jest-message-util>pretty-format>ansi-regex": {
+      "decision": "fix",
+      "madeAt": 1636370027302
+    },
+    "1002466|jest>@jest/core>jest-haste-map>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>@jest/core>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>@jest/core>@jest/transform>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>@jest/core>@jest/reporters>@jest/transform>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>jest-cli>@jest/core>@jest/reporters>@jest/transform>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>jest-cli>@jest/core>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>@jest/core>jest-config>@jest/test-sequencer>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002466|jest>jest-cli>@jest/core>jest-config>@jest/test-sequencer>jest-runner>jest-runtime>@jest/transform>jest-haste-map>sane>walker>makeerror>tmpl": {
+      "decision": "fix",
+      "madeAt": 1636370036326
+    },
+    "1002477|axios": {
+      "decision": "fix",
+      "madeAt": 1636370048559
+    },
+    "1002401|npm-audit-resolver>yargs-unparser>yargs>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1636370073839,
+      "expiresAt": 1638961990128
+    },
+    "1002401|npm-audit-resolver>yargs-unparser>yargs>cliui>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1636370073839,
+      "expiresAt": 1638961990128
+    },
+    "1002401|npm-audit-resolver>yargs-unparser>yargs>cliui>wrap-ansi>string-width>strip-ansi>ansi-regex": {
+      "decision": "ignore",
+      "madeAt": 1636370073839,
+      "expiresAt": 1638961990128
+    }
+  },
+  "rules": {},
+  "version": 1
+}
