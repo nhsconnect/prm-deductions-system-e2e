@@ -54,9 +54,8 @@ describe('Deduction request', () => {
 
         // Action
         const deductionRequestResource = await makeDeductionRequest(nhsNumber);
-        const conversationId = extractConversationIdFromDeductionRequestResource(
-          deductionRequestResource
-        );
+        const conversationId =
+          extractConversationIdFromDeductionRequestResource(deductionRequestResource);
         const messageId = v4();
         const attachmentId = v4();
         console.log(`Triggered deduction request, ConversationID: ${conversationId}`);
@@ -141,9 +140,8 @@ describe('Deduction request', () => {
 
         // Action
         const deductionRequestResource = await makeDeductionRequest(nhsNumber);
-        const conversationId = extractConversationIdFromDeductionRequestResource(
-          deductionRequestResource
-        );
+        const conversationId =
+          extractConversationIdFromDeductionRequestResource(deductionRequestResource);
         console.log(`Triggered deduction request, ConversationID: ${conversationId}`);
 
         const expectedStatus = 'ehr_extract_received';
@@ -188,9 +186,8 @@ describe('Deduction request', () => {
 
         // Action
         const deductionRequestResource = await makeDeductionRequest(nhsNumber);
-        const conversationId = extractConversationIdFromDeductionRequestResource(
-          deductionRequestResource
-        );
+        const conversationId =
+          extractConversationIdFromDeductionRequestResource(deductionRequestResource);
         console.log('DeductionRequest conversationId:', conversationId);
 
         const expectedStatus = 'continue_message_sent';
