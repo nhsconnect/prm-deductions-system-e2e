@@ -20,6 +20,9 @@ pipelines:
       ehr-repo:
         pipeline: prm-deductions-ehr-repository.dev
         stage: deploy
+      message-handler:
+        pipeline: prm-deductions-gp2gp-message-handler.dev
+        stage: deploy
     environment_variables:
       NHS_ENVIRONMENT: dev
     stages:
@@ -64,6 +67,9 @@ pipelines:
         stage: deploy
       ehr-repo:
         pipeline: prm-deductions-ehr-repository.test
+        stage: deploy
+      message-handler:
+        pipeline: prm-deductions-gp2gp-message-handler.test
         stage: deploy
     environment_variables:
       NHS_ENVIRONMENT: test
