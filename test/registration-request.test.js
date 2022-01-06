@@ -41,7 +41,7 @@ describe('EMIS registration requests', () => {
           odsCode: 'N82668',
           nhsNumber: '9692295281',
           fromPartyId: '5XZ-821385',
-          toPartyId: 'B86041-822103'
+          toPartyId: 'B86041-822710'
         }
       };
 
