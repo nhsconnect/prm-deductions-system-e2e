@@ -18,7 +18,7 @@ pipelines:
         pipeline: prm-deductions-gp-to-repo.dev
         stage: deploy
       gp2gp-adaptor:
-        pipeline: prm-deductions-gp2gp-adaptor.dev
+        pipeline: prm-deductions-gp2gp-messenger.dev
         stage: deploy
       ehr-repo:
         pipeline: prm-deductions-ehr-repository.dev
@@ -69,7 +69,7 @@ pipelines:
         pipeline: prm-deductions-gp-to-repo.test
         stage: deploy
       gp2gp-adaptor:
-        pipeline: prm-deductions-gp2gp-adaptor.test
+        pipeline: prm-deductions-gp2gp-messenger.test
         stage: deploy
       ehr-repo:
         pipeline: prm-deductions-ehr-repository.test
