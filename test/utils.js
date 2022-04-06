@@ -6,10 +6,10 @@ import { v4 as uuid } from 'uuid';
 const getPatientPdsDetails = async nhsNumber => {
   try {
     const pdsResponse = await axios.get(
-      `${config.gp2gpAdaptorUrl}/patient-demographics/${nhsNumber}/`,
+      `${config.gp2gpMessengerUrl}/patient-demographics/${nhsNumber}/`,
       {
         headers: {
-          Authorization: config.gp2gpAdaptorAuthKeys
+          Authorization: config.gp2gpMessengerAuthKeys
         },
         adapter
       }
@@ -29,7 +29,7 @@ const assignPatientToOdsCode = async (nhsNumber, odsCode) => {
 
     // Update PDS
     const patchResponse = await axios.patch(
-      `${config.gp2gpAdaptorUrl}/patient-demographics/${nhsNumber}`,
+      `${config.gp2gpMessengerUrl}/patient-demographics/${nhsNumber}`,
       {
         pdsId: pdsResponse.data.patientPdsId,
         serialChangeNumber: pdsResponse.data.serialChangeNumber,
@@ -38,7 +38,7 @@ const assignPatientToOdsCode = async (nhsNumber, odsCode) => {
       },
       {
         headers: {
-          Authorization: config.gp2gpAdaptorAuthKeys
+          Authorization: config.gp2gpMessengerAuthKeys
         },
         adapter
       }
