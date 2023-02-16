@@ -1,3 +1,7 @@
+**NB: ARCHIVED as end to end testing is now handled in our [java end to end tests](https://github.com/nhsconnect/prm-repo-e2e-tests) covering
+both continuity service and the repository services.**
+
+
 # prm-deductions-system-e2e
 
 This repository is responsible for the end to end testing of our services.
